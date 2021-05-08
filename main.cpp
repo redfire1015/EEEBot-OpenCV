@@ -131,7 +131,7 @@ int main( int argc, char** argv )
                 if (maxarea < area) //checks to see if the current max area is actually the largest area available.
                 {
                     maxarea = area;
-                    maxareaarray = maxareaarray + 1;
+                    maxareaarray = i;
                 }
             }
 
