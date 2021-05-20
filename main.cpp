@@ -136,7 +136,7 @@ int main( int argc, char** argv )
             }
 
             std::vector<cv::Point>approxedcontours; //variable for approximated contour
-            cv::approxPolyDP(contours[maxareaarray],approxedcontours,10,true); //approximated contour for the largest area only
+            cv::approxPolyDP(contours[maxareaarray],approxedcontours,5,true); //approximated contour for the largest area only
             transformed = transformPerspective(approxedcontours, frame, 320,240); //perspective transformed only using the largest area (the outline)
         }
 
@@ -148,7 +148,8 @@ int main( int argc, char** argv )
             cvtColor(transformed,transformed_hsv,COLOR_BGR2HSV); //convert image from BGR to HSV
             inRange(transformed_hsv,Scalar(100,40,70),Scalar(179,255,255),transformed_grey_pink);
 
-            cv::imshow("Transformed_input_grey_pink", transformed_grey_pink); //
+            //cv::imshow("Transformed_input_grey_pink", transformed_grey_pink);
+            cv::imshow("Transformed",transformed);
 
             int match_left = compareImages(transformed_grey_pink,symbol_Left_grey_pink);
             //std::cout << match_left << std::endl;
@@ -231,15 +232,15 @@ int main( int argc, char** argv )
                 while (strcmp(receive,confirmdone) != 0)
                 {
                     arduino.i2cRead(receive,16);
-                    std::cout << receive << std::endl;
+                    //std::cout << receive << std::endl;
                 }
+                std::cout << receive << std::endl;
                 std::cout << "out of the loop" << std::endl;
-                //while (1);
                 */
             }
         }
-        //cv::imshow("Input", frame); //Display the image in the window;
-        cv::imshow("Input_Pink_filter", frame_grey_pink); //Display the image in the window
+        cv::imshow("Input", frame); //Display the image in the window;
+        //cv::imshow("Input_Pink_filter", frame_grey_pink); //Display the image in the window
 
         int key = cv::waitKey(1);   // Wait 1ms for a keypress (required to update windows)
 
@@ -252,7 +253,3 @@ int main( int argc, char** argv )
 
     return 0;
 }
-
-
-
-
