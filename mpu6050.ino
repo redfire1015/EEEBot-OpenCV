@@ -31,7 +31,6 @@ void loop() {
   mpu6050.getAngleZ() == 0;
   //i2c get data from raspberry pi
   //Serial.println(command_input);
-  sprintf(char_progress, "incomplete");
 
   if (command_input >= 100) //reverse for n seconds
   {
@@ -39,10 +38,10 @@ void loop() {
     n_seconds_reverse = command_input - 100;
     Serial.println("Reverse");
     Serial.println(n_seconds_reverse);
-    //    digitalWrite(PWMa, LOW);
-    //    digitalWrite(PWMb, HIGH);
-    //    digitalWrite(PWMc, LOW);
-    //    digitalWrite(PWMd, HIGH);
+    digitalWrite(PWMa, LOW);
+    analogWrite(PWMb, 130);
+    digitalWrite(PWMc, LOW);
+    analogWrite(PWMd, 130);
     delay(n_seconds_reverse * 1000);
     Serial.println("Completed reverse");
     digitalWrite(PWMa, LOW);
@@ -50,8 +49,6 @@ void loop() {
     digitalWrite(PWMc, LOW);
     digitalWrite(PWMd, LOW);
     command_input = 0;
-    //char_progress[16] = "done";
-    //sprintf(char_progress, "done");
   }
   else if (command_input >= 50)//forward for n
   {
@@ -59,10 +56,10 @@ void loop() {
     n_seconds_forward = command_input - 50;
     Serial.println("Forward");
     Serial.println(n_seconds_forward);
-    //    digitalWrite(PWMa, HIGH);
-    //    digitalWrite(PWMb, LOW);
-    //    digitalWrite(PWMc, HIGH);//left motor
-    //    digitalWrite(PWMd, LOW);
+    digitalWrite(PWMa, HIGH);
+    analogWrite(PWMb, 130);
+    digitalWrite(PWMc, HIGH);//left motor
+    analogWrite(PWMd, 130);
     delay(n_seconds_forward * 1000);
     Serial.println("Completed forward");
     digitalWrite(PWMa, LOW);
@@ -70,7 +67,6 @@ void loop() {
     digitalWrite(PWMc, LOW);
     digitalWrite(PWMd, LOW);
     command_input = 0;
-    //sprintf(char_progress, "done");
   }
   else if (command_input == 2)//left for 90
   {
@@ -85,10 +81,10 @@ void loop() {
       mpu6050.update();
       angle_current_left = mpu6050.getAngleZ();
       //turn left
-      //          digitalWrite(PWMa, HIGH);
-      //          digitalWrite(PWMb, LOW);
-      //          digitalWrite(PWMc, LOW);
-      //          digitalWrite(PWMd, HIGH);
+      digitalWrite(PWMa, HIGH);
+      analogWrite(PWMb, 130);
+      digitalWrite(PWMc, LOW);
+      analogWrite(PWMd, 130);
       Serial.println((angle_current_left - angle_pre_left));
     }
     digitalWrite(PWMa, LOW);
@@ -97,7 +93,6 @@ void loop() {
     digitalWrite(PWMd, LOW);
     command_input = 0;
     Serial.println("end Left 90");
-    //sprintf(char_progress, "done");
   }
   else if (command_input == 3)//right for 90
   {
@@ -111,10 +106,10 @@ void loop() {
     {
       mpu6050.update();
       angle_current_right = mpu6050.getAngleZ();
-      //                digitalWrite(PWMa, LOW);
-      //                digitalWrite(PWMb, HIGH);
-      //                digitalWrite(PWMc, HIGH);
-      //                digitalWrite(PWMd, LOW);
+      digitalWrite(PWMa, LOW);
+      analogWrite(PWMb, 130);
+      digitalWrite(PWMc, HIGH);
+      analogWrite(PWMd, 130);
       Serial.println((angle_current_right - angle_pre_right));
     }
     digitalWrite(PWMa, LOW);
@@ -123,7 +118,6 @@ void loop() {
     digitalWrite(PWMd, LOW);
     command_input = 0;
     Serial.println("end Right 90");
-    //sprintf(char_progress, "done");
   }
   else if (command_input == 4)//180
   {
@@ -137,10 +131,10 @@ void loop() {
     {
       mpu6050.update();
       angle_current_180 = mpu6050.getAngleZ();
-      //                digitalWrite(PWMa, LOW);
-      //                digitalWrite(PWMb, HIGH);
-      //                digitalWrite(PWMc, HIGH);
-      //                digitalWrite(PWMd, LOW);
+      digitalWrite(PWMa, LOW);
+      analogWrite(PWMb, 130);
+      digitalWrite(PWMc, HIGH);
+      analogWrite(PWMd, 130);
       Serial.println((angle_current_180 - angle_pre_180));
     }
     digitalWrite(PWMa, LOW);
@@ -149,7 +143,6 @@ void loop() {
     digitalWrite(PWMd, LOW);
     command_input = 0;
     Serial.println("end 180");
-    //sprintf(char_progress, "done");
   }
   else if (command_input == 5)//360
   {
@@ -163,10 +156,10 @@ void loop() {
     {
       mpu6050.update();
       angle_current_360 = mpu6050.getAngleZ();
-      //                digitalWrite(PWMa, LOW);
-      //                digitalWrite(PWMb, HIGH);
-      //                digitalWrite(PWMc, HIGH);
-      //                digitalWrite(PWMd, LOW);
+      digitalWrite(PWMa, LOW);
+      analogWrite(PWMb, 130);
+      digitalWrite(PWMc, HIGH);
+      analogWrite(PWMd, 130);
       Serial.println((angle_current_360 - angle_pre_360));
     }
     digitalWrite(PWMa, LOW);
@@ -175,7 +168,6 @@ void loop() {
     digitalWrite(PWMd, LOW);
     command_input = 0;
     Serial.println(" end 360");
-    //sprintf(char_progress, "done");
   }
   mpu6050.update();
   //Serial.print("angleZ : ");
